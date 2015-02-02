@@ -4,10 +4,10 @@ var GameLayer = cc.LayerColor.extend({
     	this.addKeyboardHandlers(true);
         this._super( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-      	var ship = new Ship();
-        ship.setPosition( new cc.Point( 200, 200 ) );
-        this.addChild( ship );
-        ship.scheduleUpdate();
+      	this.ship = new Ship();
+        this.ship.setPosition( new cc.Point( 200, 200 ) );
+        this.addChild( this.ship );
+        this.ship.scheduleUpdate();
         return true;
     },
     onKeyDown: function( e ) {
@@ -16,12 +16,15 @@ var GameLayer = cc.LayerColor.extend({
     onKeyUp: function( e ) {
 	console.log( 'Up: ' + e );
     },
-   addKeyboardHandlers: function() {
+    addKeyboardHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed : function( e ) {
                 self.onKeyDown( e );
+                if(e==cc.KEY.space){
+                     this.ship.switchDirection();
+                }
             },
             onKeyReleased: function( e ) {
                 self.onKeyUp( e );
