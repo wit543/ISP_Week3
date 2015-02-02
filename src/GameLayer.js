@@ -1,6 +1,7 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
     	console.log( 'Initialized' );
+    	this.addKeyboardHandlers(true);
         this._super( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
       	var ship = new Ship();
@@ -8,6 +9,24 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( ship );
         ship.scheduleUpdate();
         return true;
+    },
+    onKeyDown: function( e ) {
+	console.log( 'Down: ' + e );
+    },
+    onKeyUp: function( e ) {
+	console.log( 'Up: ' + e );
+    },
+   addKeyboardHandlers: function() {
+        var self = this;
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed : function( e ) {
+                self.onKeyDown( e );
+            },
+            onKeyReleased: function( e ) {
+                self.onKeyUp( e );
+            }
+        }, this);
     }
 });
  
