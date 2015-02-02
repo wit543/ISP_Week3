@@ -7,14 +7,20 @@ var GameLayer = cc.LayerColor.extend({
       	this.ship = new Ship();
         this.ship.setPosition( new cc.Point( 200, 200 ) );
         this.addChild( this.ship );
+        this.gold = new Gold();
+        this.addChild(this.gold);
+        this.gold.randomPosition();
         this.ship.scheduleUpdate();
         return true;
     },
     onKeyDown: function( e ) {
-	console.log( 'Down: ' + e );
+        if(e==cc.KEY.space){
+             this.ship.switchDirection();
+        }
+	   console.log( 'Down: ' + e );
     },
     onKeyUp: function( e ) {
-	console.log( 'Up: ' + e );
+	   console.log( 'Up: ' + e );
     },
     addKeyboardHandlers: function() {
         var self = this;
@@ -22,9 +28,6 @@ var GameLayer = cc.LayerColor.extend({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed : function( e ) {
                 self.onKeyDown( e );
-                if(e==cc.KEY.space){
-                     this.ship.switchDirection();
-                }
             },
             onKeyReleased: function( e ) {
                 self.onKeyUp( e );
