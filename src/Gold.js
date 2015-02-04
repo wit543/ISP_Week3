@@ -4,8 +4,13 @@ var Gold = cc.Sprite.extend({
 		this.initWithFile("res/images/Gold.png");
 	},
 	randomPosition: function(){
-		this.setPosition(new cc.Point(50+Math.floor(Math.random()*200),50+Math.floor(Math.random()*200)));
-
-
-	}
+		this.setPosition(new cc.Point(75+Math.floor(Math.random()*200),75+Math.floor(Math.random()*200)));
+	},
+	closeTo: function( obj ) {
+	var myPos = this.getPosition();
+	var oPos = obj.getPosition();
+  	return ( ( Math.abs( myPos.x - oPos.x ) <= 100 ) &&
+		 ( Math.abs( myPos.y - oPos.y ) <= 100 ) );
+    }
+    
 });

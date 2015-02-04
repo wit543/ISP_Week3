@@ -11,6 +11,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.gold);
         this.gold.randomPosition();
         this.ship.scheduleUpdate();
+		this.scheduleUpdate();
         return true;
     },
     onKeyDown: function( e ) {
@@ -33,6 +34,11 @@ var GameLayer = cc.LayerColor.extend({
                 self.onKeyUp( e );
             }
         }, this);
+    },
+	update: function() {
+	if ( this.gold.closeTo( this.ship ) ) {
+	    this.gold.randomPosition();
+	}
     }
 });
  
